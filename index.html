@@ -37,24 +37,36 @@
 
   <!-- Structured Data -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Sthyra",
-      "url": "https://sthyra.com",
-      "logo": "https://sthyra.com/assets/logo.png",
-      "contactPoint": {
-        "@type": "ContactPoint",
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Sthyra",
+        "image": "https://sthyra-web.s3.ap-south-1.amazonaws.com/s3_bundle/logo.png",
+        "url": "https://sthyra.com",
         "telephone": "+91-9999999999",
-        "contactType": "sales",
-        "areaServed": "IN",
-        "availableLanguage": "en"
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bangalore",
+          "addressCountry": "IN"
+        },
+        "priceRange": "$$$",
+        "description": "Ultra-real architectural visualization and interactive 3D web experiences for luxury real estate.",
+        "sameAs": [
+          "https://instagram.com/sthyra",
+          "https://linkedin.com/company/sthyra"
+        ]
       },
-      "sameAs": [
-        "https://instagram.com/sthyra",
-        "https://linkedin.com/company/sthyra"
-      ]
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "Sthyra Cinematic Interior Visualization",
+        "description": "A photorealistic 3D architectural walkthrough of a luxury interior space.",
+        "thumbnailUrl": "https://sthyra-web.s3.ap-south-1.amazonaws.com/s3_bundle/hero_interior.png",
+        "uploadDate": "2026-02-01",
+        "contentUrl": "https://sthyra-web.s3.ap-south-1.amazonaws.com/s3_bundle/hero_interior.mp4"
+      }
+    ]
   </script>
 
   <link
