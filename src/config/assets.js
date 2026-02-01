@@ -26,7 +26,7 @@ export const ASSETS = {
 
     // SERVICES SECTION
     SERVICES: {
-        INTERACTIVE: getAssetUrl("service_interactive.png"),
+        INTERACTIVE: getAssetUrl("service_interactive.webp"), // Optimized WebP
         CINEMATIC: getAssetUrl("service_cinematic.png"),
         ULTRA_REAL: getAssetUrl("service_ultra_real.png"),
         PIXEL: getAssetUrl("service_pixel.png"),
@@ -42,7 +42,7 @@ export const ASSETS = {
     // WHY STHYRA SECTION
     WHY_STHYRA: {
         IMAGE_1: getAssetUrl("why_sthyra_1.png"),
-        IMAGE_2: getAssetUrl("why_sthyra_2_v2.png"),
+        IMAGE_2: getAssetUrl("why_sthyra_2_v2.webp"), // Optimized WebP
         IMAGE_3: getAssetUrl("why_sthyra_3.png"),
         IMAGE_4: getAssetUrl("why_sthyra_4.png"),
     },
@@ -50,7 +50,7 @@ export const ASSETS = {
     // VISUALIZATION GAP SECTION
     VIS_GAP: {
         FLOOR_PLAN: getAssetUrl("floor_plan.png"),
-        RENDER: getAssetUrl("interior_render.png"),
+        RENDER: getAssetUrl("interior_render.webp"), // Optimized WebP
     },
 
     // GLOBAL
