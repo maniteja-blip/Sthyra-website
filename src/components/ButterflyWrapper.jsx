@@ -13,6 +13,17 @@ const Butterfly = () => {
     const scrollGroup = useRef();
     const floatGroup = useRef();
 
+    // CREDIT: Animated Flying Fluttering Butterfly Loop by LasquetiSpice
+    // Source: https://sketchfab.com/3d-models/animated-flying-fluttering-butterfly-loop-80f8d9a6dadc411e89ca366cb0cfb0d9
+    // License: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+    useEffect(() => {
+        console.log(
+            '%c 🦋 3D Butterfly Model by LasquetiSpice \n%cLicensed under CC-BY-4.0 | https://sketchfab.com/LasquetiSpice',
+            'color: #d4af37; font-weight: bold; font-size: 12px;',
+            'color: #888; font-size: 10px;'
+        );
+    }, []);
+
     // 1. USE THE ORIGINAL GLB FILE (It is safer and not corrupt)
     // Ensure this file is in your public/assets/ folder
     const { scene, animations } = useGLTF('/assets/animated_flying_fluttering_butterfly_loop.glb');
