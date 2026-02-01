@@ -1,0 +1,46 @@
+import React, { useState } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import ButterflyWrapper from './components/ButterflyWrapper';
+import CustomCursor from './components/CustomCursor';
+import NoiseOverlay from './components/NoiseOverlay';
+import SmoothScroll from './components/SmoothScroll';
+import Home from './components/Home';
+import Contact from './components/Contact';
+import Preloader from './components/Preloader';
+
+function App() {
+  const location = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <SmoothScroll>
+      <div className="app-container cursor-none"> {/* Hide default cursor */}
+        <AnimatePresence mode="wait">
+          {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+        </AnimatePresence>
+
+        <CustomCursor />
+        <NoiseOverlay />
+        <ButterflyWrapper />
+        <Navbar />
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+
+        {/* Global Mobile Scroll Indicator */}
+        <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-60 pointer-events-none z-40 animate-bounce">
+          <span className="text-[10px] uppercase tracking-[0.2em] text-white">Scroll</span>
+          <div className="w-[1px] h-8 bg-gradient-to-b from-white/0 via-white to-white/0"></div>
+        </div>
+
+        <Footer />
+      </div>
+    </SmoothScroll>
+  );
+}
+
+export default App;
