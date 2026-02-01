@@ -50,12 +50,20 @@ const Footer = () => {
                     <span>Bangalore, India</span>
                 </div>
 
-                <div className="flex justify-center items-center -mb-20 pointer-events-none select-none">
-                    <img
-                        src={ASSETS.GLOBAL.LOGO}
-                        alt="Sthyra Logo"
-                        className="h-[30vw] w-auto object-contain"
-                        style={{ filter: 'invert(81%) sepia(39%) saturate(884%) hue-rotate(352deg) brightness(90%) contrast(87%)' }}
+                <div className="flex justify-center items-center -mb-10 md:-mb-16 pointer-events-none select-none">
+                    {/* GOLD GRADIENT MASKED LOGO */}
+                    <div
+                        className="w-[50vw] h-[20vw] md:w-[35vw] md:h-[12vw] bg-gradient-to-b from-[#f8dea0] via-[#d4af37] to-[#8a6e2f]"
+                        style={{
+                            WebkitMaskImage: `url(${ASSETS.GLOBAL.LOGO})`,
+                            maskImage: `url(${ASSETS.GLOBAL.LOGO})`,
+                            WebkitMaskSize: 'contain',
+                            maskSize: 'contain',
+                            WebkitMaskRepeat: 'no-repeat',
+                            maskRepeat: 'no-repeat',
+                            WebkitMaskPosition: 'center',
+                            maskPosition: 'center'
+                        }}
                     />
                 </div>
             </div>

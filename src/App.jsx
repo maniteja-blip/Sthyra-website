@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import ButterflyWrapper from './components/ButterflyWrapper';
+// Lazy Load Butterfly to reduce initial bundle size (Performance Fix)
+const ButterflyWrapper = lazy(() => import('./components/ButterflyWrapper'));
 import CustomCursor from './components/CustomCursor';
 import NoiseOverlay from './components/NoiseOverlay';
 import SmoothScroll from './components/SmoothScroll';
@@ -24,7 +25,12 @@ function App() {
 
         <CustomCursor />
         <NoiseOverlay />
-        <ButterflyWrapper />
+
+        {/* Load 3D Butterfly in background without blocking main site */}
+        <Suspense fallback={null}>
+          <ButterflyWrapper />
+        </Suspense>
+
         <Navbar />
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
