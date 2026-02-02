@@ -104,7 +104,7 @@ const Services = () => {
                             return (
                                 <motion.div
                                     key={service.id}
-                                    className="absolute inset-0 w-full h-full overflow-hidden"
+                                    className="absolute inset-0 w-full h-full overflow-hidden will-change-transform"
                                     initial={{ y: "100%" }}
                                     animate={{ y: "0%" }}
                                     exit={{ y: "-100%", opacity: 0.5 }}
@@ -115,7 +115,7 @@ const Services = () => {
                                 >
                                     {/* INTERNAL PARALLAX IMAGE */}
                                     <motion.div
-                                        className="absolute inset-0 w-full h-full"
+                                        className="absolute inset-0 w-full h-full will-change-transform"
                                         initial={{ y: "-20%" }}
                                         animate={{ y: "0%" }}
                                         exit={{ y: "20%" }} // Moves opposite to container for depth
@@ -127,7 +127,7 @@ const Services = () => {
                                         <motion.img
                                             src={service.image}
                                             alt={service.alt}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-cover will-change-transform"
                                             initial={{ scale: 1.0 }}
                                             animate={{ scale: 1.25 }}
                                             transition={{ duration: 20, ease: "linear" }}

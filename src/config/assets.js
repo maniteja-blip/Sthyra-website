@@ -21,30 +21,30 @@ export const ASSETS = {
     BELIEF: {
         VIDEO_DESKTOP: getAssetUrl("belief_vid.mp4"),
         VIDEO_MOBILE: getAssetUrl("belief_vid_2.mp4"),
-        BG_GRADIENT: getAssetUrl("belief_bg.png"), // If used
+        BG_GRADIENT: getAssetUrl("belief_bg.webp"),
     },
 
     // SERVICES SECTION
     SERVICES: {
-        INTERACTIVE: getAssetUrl("service_interactive.webp"), // Optimized WebP
-        CINEMATIC: getAssetUrl("service_cinematic.png"),
-        ULTRA_REAL: getAssetUrl("service_ultra_real.png"),
-        PIXEL: getAssetUrl("service_pixel.png"),
-        VR: getAssetUrl("service_vr.png"),
+        INTERACTIVE: getAssetUrl("service_interactive.webp"),
+        CINEMATIC: getAssetUrl("service_cinematic.webp"),
+        ULTRA_REAL: getAssetUrl("service_ultra_real.webp"),
+        PIXEL: getAssetUrl("service_pixel.webp"),
+        VR: getAssetUrl("service_vr.webp"),
     },
 
     // PROJECTS (CASE STUDY)
     PROJECTS: {
-        AADHYA_SERENE: getAssetUrl("aadhya_serene_2.png"), // Using the lighter file if possible
-        SKYLINE: getAssetUrl("skyline_balcony.png"),
+        AADHYA_SERENE: getAssetUrl("aadhya_serene_2.webp"),
+        SKYLINE: getAssetUrl("skyline_balcony.webp"),
     },
 
     // WHY STHYRA SECTION
     WHY_STHYRA: {
-        IMAGE_1: getAssetUrl("why_sthyra_1.png"),
+        IMAGE_1: getAssetUrl("why_sthyra_1.webp"),
         IMAGE_2: getAssetUrl("why_sthyra_2_v2.webp"), // Optimized WebP
-        IMAGE_3: getAssetUrl("why_sthyra_3.png"),
-        IMAGE_4: getAssetUrl("why_sthyra_4.png"),
+        IMAGE_3: getAssetUrl("why_sthyra_3.webp"),
+        IMAGE_4: getAssetUrl("why_sthyra_4.webp"),
     },
 
     // VISUALIZATION GAP SECTION
@@ -55,7 +55,7 @@ export const ASSETS = {
 
     // GLOBAL
     GLOBAL: {
-        LOGO: getAssetUrl("logo.png"),
+        LOGO: getAssetUrl("logo.webp"),
         BUTTERFLY_GLB: getAssetUrl("butterfly.gltf"), // Or .glb depending on what's used
     }
 };
