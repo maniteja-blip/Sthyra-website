@@ -6,7 +6,7 @@ const Footer = () => {
     const navigate = useNavigate();
 
     return (
-        <footer id="footer" className="bg-[#050505] text-[#f0f0f0] pt-32 pb-24 md:pb-20 px-6 md:px-12 border-t border-white/5 overflow-hidden">
+        <footer id="footer" className="bg-[#050505] text-[#f0f0f0] pt-32 pb-8 md:pb-12 px-6 md:px-12 border-t border-white/5 overflow-hidden">
             <div className="flex flex-col md:flex-row justify-between items-start mb-24 md:mb-32">
 
                 {/* HEADLINE */}
@@ -50,7 +50,7 @@ const Footer = () => {
                     <span>Bangalore, India</span>
                 </div>
 
-                <div className="flex justify-center items-center -mb-4 md:-mb-8 pointer-events-none select-none">
+                <div className="flex justify-center items-center -mb-6 md:-mb-10 pointer-events-none select-none">
                     {/* GOLD LOGO (Filter-based for better cross-device compatibility) 
                         Fixes "mask-image" issues on mobile/Safari with external S3 assets 
                     */}

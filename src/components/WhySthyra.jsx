@@ -93,14 +93,22 @@ const WhySthyra = () => {
         offset: ['start start', 'end end']
     });
 
+    // Fade out the title as we scroll into the cards
+    // Range [0, 0.2]: Start fading immediately, fully gone by 20% of section scroll
+    const titleOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+    const titleY = useTransform(scrollYProgress, [0, 0.2], [0, -50]); // Move up slightly too
+
     return (
         <section ref={container} id="why-sthyra" className="relative bg-[#050505]">
             {/* Main Title Intro (Scrolls away) */}
-            <div className="min-h-[50vh] flex items-center justify-center sticky top-0 z-0">
-                <div className="text-center">
+            <div className="min-h-[50vh] flex items-center justify-center sticky top-0 z-0 pointer-events-none">
+                <motion.div
+                    className="text-center"
+                    style={{ opacity: titleOpacity, y: titleY }}
+                >
                     <p className="text-[#d4af37] tracking-[0.3em] uppercase text-xs mb-4">The Advantage</p>
                     <h2 className="text-5xl md:text-7xl font-serif text-white">Why Sthyra?</h2>
-                </div>
+                </motion.div>
             </div>
 
             {/* Cards Container */}
