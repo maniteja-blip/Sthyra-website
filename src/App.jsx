@@ -15,6 +15,15 @@ import Preloader from './components/Preloader';
 function App() {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <SmoothScroll>
@@ -37,8 +46,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
 
-        {/* Global Mobile Scroll Indicator */}
-        <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-60 pointer-events-none z-40 animate-bounce">
+        {/* Global Mobile Scroll Indicator - Hides on scroll */}
+        <div className={`md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 transition-opacity duration-500 pointer-events-none z-40 ${isScrolled ? 'opacity-0' : 'opacity-60 animate-bounce'}`}>
           <span className="text-[10px] uppercase tracking-[0.2em] text-white">Scroll</span>
           <div className="w-[1px] h-8 bg-gradient-to-b from-white/0 via-white to-white/0"></div>
         </div>

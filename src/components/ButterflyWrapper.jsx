@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useEffect, Suspense } from 'react';
+import React, { useLayoutEffect, useRef, useEffect, useState, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useGLTF, useAnimations, Html } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
@@ -160,6 +160,17 @@ const Butterfly = () => {
 };
 
 const ButterflyWrapper = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     return (
         <div className="fixed inset-0 z-50 pointer-events-none w-full h-full">
             <Canvas
@@ -174,7 +185,8 @@ const ButterflyWrapper = () => {
                 gl={{
                     antialias: true,
                     alpha: true,
-                    pixelRatio: typeof window !== 'undefined' ? Math.min(window.devicePixelRatio, 2) : 1
+                    // OPTIMIZATION: Use lower pixel ratio on mobile
+                    pixelRatio: typeof window !== 'undefined' ? (isMobile ? 1 : Math.min(window.devicePixelRatio, 2)) : 1
                 }}
             >
                 <ambientLight intensity={1.5} />
@@ -184,15 +196,17 @@ const ButterflyWrapper = () => {
                     <Butterfly />
                 </Suspense>
 
-                {/* GLOW EFFECT */}
-                <EffectComposer>
-                    <Bloom
-                        intensity={2.0} // Strength of the glow
-                        luminanceThreshold={0.2} // Threshold to trigger glow (lower = more glow)
-                        luminanceSmoothing={0.9} // Smoothness of the glow
-                        height={300} // Resolution
-                    />
-                </EffectComposer>
+                {/* GLOW EFFECT - DISABLED ON MOBILE FOR PERFORMANCE */}
+                {!isMobile && (
+                    <EffectComposer>
+                        <Bloom
+                            intensity={2.0} // Strength of the glow
+                            luminanceThreshold={0.2} // Threshold to trigger glow (lower = more glow)
+                            luminanceSmoothing={0.9} // Smoothness of the glow
+                            height={300} // Resolution
+                        />
+                    </EffectComposer>
+                )}
             </Canvas>
         </div>
     );

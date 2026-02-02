@@ -29,7 +29,7 @@ const Hero = () => {
     <section id="hero" ref={containerRef} className="relative w-full h-screen overflow-hidden">
       {/* Background Video with Slow Scale */}
       <motion.div
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full will-change-transform"
         initial={{ scale: 1.1 }}
         animate={{ scale: 1 }}
         transition={{ duration: 10, ease: "easeOut" }}

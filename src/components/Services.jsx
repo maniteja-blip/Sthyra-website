@@ -85,6 +85,16 @@ const ServiceItem = ({ service, setActiveService }) => {
 
 const Services = () => {
     const [activeService, setActiveService] = useState(1);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     return (
         <section id="services" className="relative bg-[#050505] text-white">
@@ -129,7 +139,7 @@ const Services = () => {
                                             alt={service.alt}
                                             className="w-full h-full object-cover will-change-transform"
                                             initial={{ scale: 1.0 }}
-                                            animate={{ scale: 1.25 }}
+                                            animate={isMobile ? { scale: 1.0 } : { scale: 1.25 }}
                                             transition={{ duration: 20, ease: "linear" }}
                                         />
 

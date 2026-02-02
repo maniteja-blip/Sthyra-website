@@ -6,7 +6,7 @@ const Footer = () => {
     const navigate = useNavigate();
 
     return (
-        <footer id="footer" className="bg-[#050505] text-[#f0f0f0] pt-32 pb-24 md:pb-6 px-6 md:px-12 border-t border-white/5 overflow-hidden">
+        <footer id="footer" className="bg-[#050505] text-[#f0f0f0] pt-32 pb-24 md:pb-20 px-6 md:px-12 border-t border-white/5 overflow-hidden">
             <div className="flex flex-col md:flex-row justify-between items-start mb-24 md:mb-32">
 
                 {/* HEADLINE */}
@@ -50,19 +50,18 @@ const Footer = () => {
                     <span>Bangalore, India</span>
                 </div>
 
-                <div className="flex justify-center items-center -mb-10 md:-mb-16 pointer-events-none select-none">
-                    {/* GOLD GRADIENT MASKED LOGO */}
-                    <div
-                        className="w-[50vw] h-[20vw] md:w-[35vw] md:h-[12vw] bg-gradient-to-b from-[#f8dea0] via-[#d4af37] to-[#8a6e2f]"
+                <div className="flex justify-center items-center -mb-4 md:-mb-8 pointer-events-none select-none">
+                    {/* GOLD LOGO (Filter-based for better cross-device compatibility) 
+                        Fixes "mask-image" issues on mobile/Safari with external S3 assets 
+                    */}
+                    <img
+                        src={ASSETS.GLOBAL.LOGO}
+                        alt="Sthyra Logo"
+                        className="w-[50vw] md:w-[35vw] object-contain opacity-90"
                         style={{
-                            WebkitMaskImage: `url(${ASSETS.GLOBAL.LOGO})`,
-                            maskImage: `url(${ASSETS.GLOBAL.LOGO})`,
-                            WebkitMaskSize: 'contain',
-                            maskSize: 'contain',
-                            WebkitMaskRepeat: 'no-repeat',
-                            maskRepeat: 'no-repeat',
-                            WebkitMaskPosition: 'center',
-                            maskPosition: 'center'
+                            // Filter to turn the logo into Gold (#d4af37)
+                            // Assumes base logo is black/white/color. brightness(0) makes it black first.
+                            filter: 'brightness(0) invert(79%) sepia(27%) saturate(1313%) hue-rotate(1deg) brightness(91%) contrast(86%) drop-shadow(0 0 10px rgba(212, 175, 55, 0.3))'
                         }}
                     />
                 </div>

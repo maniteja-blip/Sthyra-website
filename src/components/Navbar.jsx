@@ -11,9 +11,30 @@ const Navbar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
+            const beliefSection = document.getElementById('belief');
+            let isOverBelief = false;
+
+            if (beliefSection) {
+                const rect = beliefSection.getBoundingClientRect();
+                // Check if the Navbar (approx 100px) is overlapping with the Belief section
+                // or if the Belief section is dominating the viewport
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    isOverBelief = true;
+                }
+            }
+
+            // Transparent if at Top (Hero) OR Over Belief Section
+            if (window.scrollY < 50 || isOverBelief) {
+                setIsScrolled(false);
+            } else {
+                setIsScrolled(true);
+            }
         };
+
         window.addEventListener('scroll', handleScroll);
+        // Initial check
+        handleScroll();
+
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
