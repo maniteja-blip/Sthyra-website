@@ -24,9 +24,9 @@ const Belief = () => {
         }
     }, [isInView, videoLoaded]);
 
-    // Parallax Effect for Background
-    const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
-    const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
+    // Parallax Effect for Background - REMOVED per user request to fix overlapping issue
+    // const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
+    // const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
     const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
     // Text Animations
@@ -50,10 +50,7 @@ const Belief = () => {
                     playsInline
                     preload="auto"
                     onLoadedData={() => setVideoLoaded(true)}
-                    style={{
-                        y,
-                        scale
-                    }}
+                // Removed style={{ y, scale }}
                 >
                     <source src={ASSETS.BELIEF.VIDEO_MOBILE} media="(max-width: 767px)" />
                     <source src={ASSETS.BELIEF.VIDEO_DESKTOP} type="video/mp4" />

@@ -59,9 +59,7 @@ const VisualizationGap = () => {
                 <div className="w-full md:w-1/2 h-1/2 md:h-full relative flex items-center justify-center bg-[#0a0a0a] px-8 md:px-20 z-10">
 
                     {/* Floating Instructions */}
-                    <div className="absolute top-10 left-10 text-[#d4af37] text-xs uppercase tracking-widest opacity-50">
-                        The Transformation
-                    </div>
+
 
                     {/* Text 1: The Old Way matches the Floor Plan */}
                     <motion.div
