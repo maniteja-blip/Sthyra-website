@@ -27,9 +27,11 @@ export const ASSETS = {
     // SERVICES SECTION
     SERVICES: {
         INTERACTIVE: getAssetUrl("service_interactive.webp"),
+        MOBILE_INTERACTIVE: getAssetUrl("mobile_website_inetractivity.webp"),
         CINEMATIC: getAssetUrl("service_cinematic.webp"),
         ULTRA_REAL: getAssetUrl("service_ultra_real.webp"),
         PIXEL: getAssetUrl("service_pixel.webp"),
+        MOBILE_PIXEL: getAssetUrl("mobile_service_pixel.webp"),
         VR: getAssetUrl("service_vr.webp"),
     },
 
@@ -56,6 +58,7 @@ export const ASSETS = {
     // GLOBAL
     GLOBAL: {
         LOGO: getAssetUrl("logo.webp"),
+        FOOTER_LOGO: getAssetUrl("Sthyra_Lg_gold.webp"),
         BUTTERFLY_GLB: getAssetUrl("butterfly.gltf"), // Or .glb depending on what's used
     }
 };

@@ -39,30 +39,28 @@ const MobileProjects = () => {
                 <span className="text-[10px] font-mono text-[#d4af37]">0{index + 1} / 0{projects.length}</span>
             </div>
 
-            {/* Navigation Buttons - Explicit Small Buttons */}
-            <div className="absolute inset-0 z-40 pointer-events-none">
-                {/* Left Button */}
-                <div
-                    className={`absolute left-4 top-[58%] -translate-y-1/2 pointer-events-auto transition-opacity duration-300 ${index > 0 ? 'opacity-100' : 'opacity-0'}`}
-                    onClick={() => index > 0 && setIndex(index - 1)}
-                >
-                    <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center border border-white/20 active:scale-95 transition-transform">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                            <path d="M15 18l-6-6 6-6" />
-                        </svg>
-                    </div>
+            {/* Left Button - Premium Glass Pill */}
+            {/* Left Button - Premium Glass Pill */}
+            <div
+                className={`absolute left-4 top-[65%] -translate-y-1/2 z-40 pointer-events-auto transition-opacity duration-300 ${index > 0 ? 'opacity-100' : 'opacity-0'}`}
+                onClick={() => index > 0 && setIndex(index - 1)}
+            >
+                <div className="w-12 h-12 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 flex items-center justify-center active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
+                        <path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                 </div>
+            </div>
 
-                {/* Right Button */}
-                <div
-                    className={`absolute right-4 top-[58%] -translate-y-1/2 pointer-events-auto transition-opacity duration-300 ${index < projects.length - 1 ? 'opacity-100' : 'opacity-0'}`}
-                    onClick={() => index < projects.length - 1 && setIndex(index + 1)}
-                >
-                    <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center border border-white/20 active:scale-95 transition-transform">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                            <path d="M9 18l6-6-6-6" />
-                        </svg>
-                    </div>
+            {/* Right Button - Premium Glass Pill */}
+            <div
+                className={`absolute right-4 top-[65%] -translate-y-1/2 z-40 pointer-events-auto transition-opacity duration-300 ${index < projects.length - 1 ? 'opacity-100' : 'opacity-0'}`}
+                onClick={() => index < projects.length - 1 && setIndex(index + 1)}
+            >
+                <div className="w-12 h-12 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 flex items-center justify-center active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5">
+                        <path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                 </div>
             </div>
 

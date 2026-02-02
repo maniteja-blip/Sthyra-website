@@ -86,30 +86,37 @@ const Butterfly = () => {
                 el.rotation.set(0, Math.PI / 3, 0);
                 el.scale.set(1.5, 1.5, 1.5);
 
-                // Gentle Figure-8 / Floating Loop
-                const tl = gsap.timeline({ repeat: -1, yoyo: true });
+                // --- RANDOM WANDER LOGIC ---
+                // Instead of a strict loop, we move to random points to feel "alive"
+                const wander = () => {
+                    // Random target within visible bounds (approx for mobile aspect ratio)
+                    const tx = (Math.random() - 0.5) * 2.5; // -1.25 to 1.25
+                    const ty = (Math.random() - 0.5) * 6;   // -3 to 3 (covers full vertical height)
+                    const tz = (Math.random() - 0.5) * 2;   // -1 to 1 (depth)
 
-                tl.to(el.position, {
-                    x: 1,
-                    y: 0.5,
-                    duration: 6,
-                    ease: "sine.inOut"
-                });
+                    // Random rotation - subtle tilt matching movement
+                    const ry = tx * 0.5; // Face direction roughly
 
-                tl.to(el.rotation, {
-                    y: Math.PI / 2,
-                    duration: 6,
-                    ease: "sine.inOut"
-                }, "<"); // Run at start of previous
+                    const duration = 4 + Math.random() * 4; // 4s to 8s (slow & calm)
 
-                // Secondary motion
-                gsap.to(el.position, {
-                    z: 0.5,
-                    duration: 3,
-                    repeat: -1,
-                    yoyo: true,
-                    ease: "sine.inOut"
-                });
+                    gsap.to(el.position, {
+                        x: tx,
+                        y: ty,
+                        z: tz,
+                        duration: duration,
+                        ease: "sine.inOut",
+                        onComplete: wander // Loop forever
+                    });
+
+                    gsap.to(el.rotation, {
+                        y: ry,
+                        duration: duration,
+                        ease: "sine.inOut"
+                    });
+                };
+
+                // Start wandering
+                wander();
 
             } else {
                 // --- DESKTOP BEHAVIOR: SCROLL TRIGGER ---
@@ -199,15 +206,74 @@ const Butterfly = () => {
 
 const ButterflyWrapper = () => {
     const [isMobile, setIsMobile] = useState(false);
+    const [isLowPerf, setIsLowPerf] = useState(false);
 
     useEffect(() => {
         const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
+            const mobile = window.innerWidth < 768;
+            setIsMobile(mobile);
+
+            if (mobile) {
+                // 1. HARDWARE CHECK (Heuristic)
+                // If device has <= 4 cores or low memory info, it's likely a budget phone
+                const cores = navigator.hardwareConcurrency || 4;
+                // deviceMemory is experimental, default to generic high value if undefined
+                const ram = navigator.deviceMemory || 8;
+
+                if (cores < 4 || ram < 4) {
+                    console.log("🦋 Butterfly: Low-end device detected (CPU/RAM). Disabling for performance.");
+                    setIsLowPerf(true);
+                    return;
+                }
+
+                // 2. RUNTIME FPS CHECK
+                // Monitor performance for the first 2 seconds
+                let frameCount = 0;
+                let startTime = performance.now();
+                let rafId;
+
+                const checkFPS = () => {
+                    frameCount++;
+                    const currentTime = performance.now();
+                    const elapsed = currentTime - startTime;
+
+                    if (elapsed >= 1000) { // Every second
+                        const fps = (frameCount / elapsed) * 1000;
+                        console.log(`🦋 Butterfly: Mobile FPS Check: ${Math.round(fps)}`);
+
+                        if (fps < 30) { // Threshold: Below 30fps is "laggy"
+                            console.log("🦋 Butterfly: FPS too low. Disabling animation.");
+                            setIsLowPerf(true);
+                            cancelAnimationFrame(rafId);
+                            return;
+                        }
+
+                        // Reset window
+                        frameCount = 0;
+                        startTime = currentTime;
+                    }
+
+                    // Stop checking after 3 seconds (if it's stable by then, keep it)
+                    if (performance.now() > 5000) {
+                        return;
+                    }
+
+                    rafId = requestAnimationFrame(checkFPS);
+                };
+
+                rafId = requestAnimationFrame(checkFPS);
+
+                return () => cancelAnimationFrame(rafId);
+            }
         };
+
         checkMobile();
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
+
+    // Performance Optimization: Don't render anything if device is struggling
+    if (isLowPerf) return null;
 
     return (
         <div className="fixed inset-0 z-[70] pointer-events-none w-full h-full">

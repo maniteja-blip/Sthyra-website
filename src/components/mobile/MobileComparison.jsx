@@ -35,8 +35,29 @@ const MobileComparison = () => {
 
             <div
                 ref={containerRef}
-                className="relative flex-1 w-full h-full"
-            // Interactive container for simple tap-to-move (optional) or just contain the slider
+                className="relative flex-1 w-full h-full touch-none cursor-ew-resize"
+                onPointerDown={(e) => {
+                    isDragging.current = true;
+                    // Initial jump to position
+                    if (containerRef.current) {
+                        const rect = containerRef.current.getBoundingClientRect();
+                        const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+                        setSliderPos((x / rect.width) * 100);
+                    }
+                }}
+                onPointerMove={(e) => {
+                    if (isDragging.current && containerRef.current) {
+                        const rect = containerRef.current.getBoundingClientRect();
+                        const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+                        setSliderPos((x / rect.width) * 100);
+                    }
+                }}
+                onPointerUp={() => {
+                    isDragging.current = false;
+                }}
+                onPointerLeave={() => {
+                    isDragging.current = false;
+                }}
             >
                 {/* 1. RIGHT SIDE IMAGE (Background) - STHYRA WAY (Render) */}
                 {/* User said "Right side we have sthyra render". In a slider, the base image is full. */}
@@ -89,23 +110,9 @@ const MobileComparison = () => {
                     {/* Vertical Line */}
                     <div className="absolute inset-y-0 -left-[1px] w-[2px] bg-white shadow-[0_0_10px_rgba(0,0,0,0.5)]" />
 
-                    {/* Draggable Button */}
+                    {/* Draggable Button - Visual Only (Driven by Parent Pointer Events) */}
                     <motion.div
-                        className="absolute top-1/2 -translate-y-1/2 -left-6 w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center z-30 cursor-grab active:cursor-grabbing touch-none"
-                        drag="x"
-                        dragConstraints={containerRef} // This is tricky, we want the button to generally follow finger but lock to the sliderPos logic. 
-                        // Better approach: Make the handle drag update the state.
-                        dragElastic={0}
-                        dragMomentum={false}
-                        onDrag={(event, info) => {
-                            if (!containerRef.current) return;
-                            const rect = containerRef.current.getBoundingClientRect();
-                            // info.point.x is global. 
-                            // clamp between 0 and rect.width
-                            const x = Math.max(0, Math.min(info.point.x - rect.left, rect.width));
-                            const percentage = (x / rect.width) * 100;
-                            setSliderPos(percentage);
-                        }}
+                        className="absolute top-1/2 -translate-y-1/2 -left-6 w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center z-30 pointer-events-none"
                     >
                         {/* Arrows Icon */}
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2">

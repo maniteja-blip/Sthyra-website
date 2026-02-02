@@ -67,13 +67,13 @@ const Navbar = () => {
     return (
         <>
             <motion.nav
-                className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-12 py-6 transition-all duration-500 ${isScrolled ? 'bg-transparent md:bg-[#0a0a0a]/90 md:backdrop-blur-md py-4' : 'bg-transparent'}`}
+                className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-12 py-6 transition-all duration-500 pointer-events-none ${isScrolled ? 'bg-transparent md:bg-[#0a0a0a]/90 md:backdrop-blur-md py-4' : 'bg-transparent'}`}
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1, delay: 1 }}
             >
                 {/* Logo - Inverted to white for dark theme - HIDDEN ON MOBILE per user request */}
-                <div className="hidden md:block w-32 md:w-40 cursor-pointer z-50" onClick={scrollToTop}>
+                <div className="hidden md:block w-32 md:w-40 cursor-pointer z-50 pointer-events-auto" onClick={scrollToTop}>
                     <img
                         src={ASSETS.GLOBAL.LOGO}
                         alt="Sthyra Real Estate Visualization Logo"
@@ -81,7 +81,7 @@ const Navbar = () => {
                     />
                 </div>
 
-                <div className="hidden md:flex gap-8 text-sm uppercase tracking-widest font-light drop-shadow-md">
+                <div className="hidden md:flex gap-8 text-sm uppercase tracking-widest font-light drop-shadow-md pointer-events-auto">
                     <button onClick={() => scrollToSection('case-study')} className="hover:text-white transition-colors text-white/90">Projects</button>
                     <button onClick={() => scrollToSection('services')} className="hover:text-white transition-colors text-white/90">Services</button>
                     <button onClick={() => scrollToSection('belief')} className="hover:text-white transition-colors text-white/90">Beliefs</button>
@@ -89,14 +89,14 @@ const Navbar = () => {
 
                 <button
                     onClick={navigateToContact}
-                    className="hidden md:block text-xs uppercase tracking-widest border border-white/20 px-6 py-3 hover:bg-white hover:text-black transition-all"
+                    className="hidden md:block text-xs uppercase tracking-widest border border-white/20 px-6 py-3 hover:bg-white hover:text-black transition-all pointer-events-auto"
                 >
                     Contact
                 </button>
 
                 {/* Mobile Menu Icon */}
                 <div
-                    className="md:hidden w-8 h-8 flex flex-col justify-center items-end gap-1 cursor-pointer z-50"
+                    className="md:hidden w-8 h-8 flex flex-col justify-center items-end gap-1 cursor-pointer z-50 pointer-events-auto"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                     <motion.div

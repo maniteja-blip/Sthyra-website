@@ -55,14 +55,9 @@ const Footer = () => {
                         Fixes "mask-image" issues on mobile/Safari with external S3 assets 
                     */}
                     <img
-                        src={ASSETS.GLOBAL.LOGO}
+                        src={ASSETS.GLOBAL.FOOTER_LOGO}
                         alt="Sthyra Logo"
                         className="w-[50vw] md:w-[35vw] object-contain opacity-90"
-                        style={{
-                            // Filter to turn the logo into Gold (#d4af37)
-                            // Assumes base logo is black/white/color. brightness(0) makes it black first.
-                            filter: 'brightness(0) invert(79%) sepia(27%) saturate(1313%) hue-rotate(1deg) brightness(91%) contrast(86%) drop-shadow(0 0 10px rgba(212, 175, 55, 0.3))'
-                        }}
                     />
                 </div>
             </div>
