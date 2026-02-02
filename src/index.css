@@ -42,3 +42,23 @@
   background: #333;
   border-radius: 4px;
 }
+
+/* Mobile Scroll Snap Logic */
+@media (max-width: 768px) {
+
+  html,
+  body {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+
+  section,
+  footer {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: 100vh;
+    /* Ensure sections are at least full height for snapping */
+  }
+}

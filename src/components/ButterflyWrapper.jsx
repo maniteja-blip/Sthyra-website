@@ -70,80 +70,118 @@ const Butterfly = () => {
         }
     });
 
-    // 5. SCROLL    // Scroll
+    // 5. ANIMATION CONTROLLER
     useLayoutEffect(() => {
         if (!scrollGroup.current) return;
+
+        const isMobile = window.innerWidth < 768;
+
         const ctx = gsap.context(() => {
             const el = scrollGroup.current;
 
-            // Set Initial Scale/Pos
-            el.position.set(0, 0, 0);
-            el.rotation.set(0, Math.PI / 4, 0);
-            el.scale.set(2.5, 2.5, 2.5);
+            if (isMobile) {
+                // --- MOBILE BEHAVIOR: GENTLE LOOPING FLIGHT ---
+                // Start visible (Center-ish but moving)
+                el.position.set(-1, -0.5, 0);
+                el.rotation.set(0, Math.PI / 3, 0);
+                el.scale.set(1.5, 1.5, 1.5);
 
-            // 1. Hero
-            if (document.getElementById('hero')) {
+                // Gentle Figure-8 / Floating Loop
+                const tl = gsap.timeline({ repeat: -1, yoyo: true });
+
+                tl.to(el.position, {
+                    x: 1,
+                    y: 0.5,
+                    duration: 6,
+                    ease: "sine.inOut"
+                });
+
+                tl.to(el.rotation, {
+                    y: Math.PI / 2,
+                    duration: 6,
+                    ease: "sine.inOut"
+                }, "<"); // Run at start of previous
+
+                // Secondary motion
                 gsap.to(el.position, {
-                    scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: 1 },
-                    x: 2, y: -1, z: -2
+                    z: 0.5,
+                    duration: 3,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
                 });
-            }
 
-            // 2. Belief
-            if (document.getElementById('belief')) {
-                gsap.to(el.rotation, {
-                    scrollTrigger: { trigger: "#belief", start: "top bottom", end: "bottom top", scrub: 1 },
-                    y: Math.PI * 2, x: 0.5
-                });
-            }
+            } else {
+                // --- DESKTOP BEHAVIOR: SCROLL TRIGGER ---
 
-            // 3. Services (Center)
-            if (document.getElementById('services')) {
-                gsap.to(el.position, {
-                    scrollTrigger: { trigger: "#services", start: "top center", end: "bottom center", scrub: 1 },
-                    x: 0, y: 0, z: 0
-                });
-            }
+                // Set Initial Scale/Pos
+                el.position.set(0, 0, 0);
+                el.rotation.set(0, Math.PI / 4, 0);
+                el.scale.set(2.5, 2.5, 2.5);
 
-            // 4. Why Sthyra (Move Left to let text be read on right)
-            if (document.getElementById('why-sthyra')) {
-                gsap.to(el.position, {
-                    scrollTrigger: { trigger: "#why-sthyra", start: "top bottom", end: "center center", scrub: 1 },
-                    x: -3, y: 1, z: -2
-                });
-                gsap.to(el.rotation, {
-                    scrollTrigger: { trigger: "#why-sthyra", start: "top bottom", end: "center center", scrub: 1 },
-                    y: Math.PI / 2
-                });
-            }
+                // 1. Hero
+                if (document.getElementById('hero')) {
+                    gsap.to(el.position, {
+                        scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: 1 },
+                        x: 2, y: -1, z: -2
+                    });
+                }
 
-            // 5. Case Study (Fly Up and Away - Intermediate step)
-            if (document.getElementById('case-study')) {
-                gsap.to(el.position, {
-                    scrollTrigger: { trigger: "#case-study", start: "top bottom", end: "center center", scrub: 1 },
-                    x: 2, y: 4, z: -5
-                });
-            }
+                // 2. Belief
+                if (document.getElementById('belief')) {
+                    gsap.to(el.rotation, {
+                        scrollTrigger: { trigger: "#belief", start: "top bottom", end: "bottom top", scrub: 1 },
+                        y: Math.PI * 2, x: 0.5
+                    });
+                }
 
-            // 6. Footer (Land on Contact Button)
-            if (document.getElementById('footer')) {
-                // Fly down to the bottom right where the button is
-                gsap.to(el.position, {
-                    scrollTrigger: { trigger: "#footer", start: "top center", end: "bottom bottom", scrub: 1 },
-                    x: 3.5, y: -2.5, z: 0
-                });
-                // Rotate to face the user/button
-                gsap.to(el.rotation, {
-                    scrollTrigger: { trigger: "#footer", start: "top center", end: "bottom bottom", scrub: 1 },
-                    x: 0, y: -Math.PI / 4, z: 0
-                });
-                // Scale down slightly to "land"
-                gsap.to(el.scale, {
-                    scrollTrigger: { trigger: "#footer", start: "top center", end: "bottom bottom", scrub: 1 },
-                    x: 1.5, y: 1.5, z: 1.5
-                });
-            }
+                // 3. Services (Center)
+                if (document.getElementById('services')) {
+                    gsap.to(el.position, {
+                        scrollTrigger: { trigger: "#services", start: "top center", end: "bottom center", scrub: 1 },
+                        x: 0, y: 0, z: 0
+                    });
+                }
 
+                // 4. Why Sthyra (Move Left to let text be read on right)
+                if (document.getElementById('why-sthyra')) {
+                    gsap.to(el.position, {
+                        scrollTrigger: { trigger: "#why-sthyra", start: "top bottom", end: "center center", scrub: 1 },
+                        x: -3, y: 1, z: -2
+                    });
+                    gsap.to(el.rotation, {
+                        scrollTrigger: { trigger: "#why-sthyra", start: "top bottom", end: "center center", scrub: 1 },
+                        y: Math.PI / 2
+                    });
+                }
+
+                // 5. Case Study (Fly Up and Away - Intermediate step)
+                if (document.getElementById('case-study')) {
+                    gsap.to(el.position, {
+                        scrollTrigger: { trigger: "#case-study", start: "top bottom", end: "center center", scrub: 1 },
+                        x: 2, y: 4, z: -5
+                    });
+                }
+
+                // 6. Footer (Land on Contact Button)
+                if (document.getElementById('footer')) {
+                    // Fly down to the bottom right where the button is
+                    gsap.to(el.position, {
+                        scrollTrigger: { trigger: "#footer", start: "top center", end: "bottom bottom", scrub: 1 },
+                        x: 3.5, y: -2.5, z: 0
+                    });
+                    // Rotate to face the user/button
+                    gsap.to(el.rotation, {
+                        scrollTrigger: { trigger: "#footer", start: "top center", end: "bottom bottom", scrub: 1 },
+                        x: 0, y: -Math.PI / 4, z: 0
+                    });
+                    // Scale down slightly to "land"
+                    gsap.to(el.scale, {
+                        scrollTrigger: { trigger: "#footer", start: "top center", end: "bottom bottom", scrub: 1 },
+                        x: 1.5, y: 1.5, z: 1.5
+                    });
+                }
+            }
         });
         return () => ctx.revert();
     }, []);
@@ -172,7 +210,7 @@ const ButterflyWrapper = () => {
     }, []);
 
     return (
-        <div className="fixed inset-0 z-50 pointer-events-none w-full h-full">
+        <div className="fixed inset-0 z-[70] pointer-events-none w-full h-full">
             <Canvas
                 className="pointer-events-none"
                 style={{ pointerEvents: 'none' }}

@@ -16,6 +16,16 @@ function App() {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -46,13 +56,11 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
 
-        {/* Global Mobile Scroll Indicator - Hides on scroll */}
-        <div className={`md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 transition-opacity duration-500 pointer-events-none z-40 ${isScrolled ? 'opacity-0' : 'opacity-60 animate-bounce'}`}>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-white">Scroll</span>
-          <div className="w-[1px] h-8 bg-gradient-to-b from-white/0 via-white to-white/0"></div>
-        </div>
 
-        <Footer />
+
+        {/* Footer - HIDE on Mobile Home because MobileView handles it as a slide */}
+        {/* On Desktop or other pages, show it normally */}
+        {(!isMobile || location.pathname !== '/') && <Footer />}
       </div>
     </SmoothScroll>
   );

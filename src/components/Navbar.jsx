@@ -72,8 +72,8 @@ const Navbar = () => {
                 animate={{ y: 0 }}
                 transition={{ duration: 1, delay: 1 }}
             >
-                {/* Logo - Inverted to white for dark theme */}
-                <div className="w-32 md:w-40 cursor-pointer z-50" onClick={scrollToTop}>
+                {/* Logo - Inverted to white for dark theme - HIDDEN ON MOBILE per user request */}
+                <div className="hidden md:block w-32 md:w-40 cursor-pointer z-50" onClick={scrollToTop}>
                     <img
                         src={ASSETS.GLOBAL.LOGO}
                         alt="Sthyra Real Estate Visualization Logo"
