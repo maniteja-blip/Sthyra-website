@@ -212,64 +212,77 @@ const ButterflyWrapper = () => {
         const checkMobile = () => {
             const mobile = window.innerWidth < 768;
             setIsMobile(mobile);
+            return mobile;
+        };
 
-            if (mobile) {
-                // 1. HARDWARE CHECK (Heuristic)
-                // If device has <= 4 cores or low memory info, it's likely a budget phone
-                const cores = navigator.hardwareConcurrency || 4;
-                // deviceMemory is experimental, default to generic high value if undefined
-                const ram = navigator.deviceMemory || 8;
+        // Initial check for mobile state
+        const mobile = checkMobile();
 
-                if (cores < 4 || ram < 4) {
-                    console.log("🦋 Butterfly: Low-end device detected (CPU/RAM). Disabling for performance.");
+        // --- PERFORMANCE CHECK (ALL DEVICES) ---
+        // 1. HARDWARE CHECK (Heuristic)
+        const cores = navigator.hardwareConcurrency || 4;
+        const ram = navigator.deviceMemory || 8; // Default to 8GB if unknown
+
+        // Strict check for low-end mobile, lenient for desktop
+        if (mobile && (cores < 4 || ram < 4)) {
+            console.log("🦋 Butterfly: Low-end mobile device detected. Disabling.");
+            setIsLowPerf(true);
+            return;
+        }
+
+        // 2. RUNTIME FPS CHECK
+        // Monitor performance for the first few seconds
+        let frameCount = 0;
+        let startTime = performance.now();
+        let rafId;
+
+        const checkFPS = () => {
+            frameCount++;
+            const currentTime = performance.now();
+            const elapsed = currentTime - startTime;
+
+            if (elapsed >= 1000) { // Every second
+                const fps = (frameCount / elapsed) * 1000;
+                // console.log(`🦋 Butterfly: FPS Check: ${Math.round(fps)}`);
+
+                // Thresholds: Mobile < 30, Desktop < 15
+                const threshold = window.innerWidth < 768 ? 30 : 15;
+
+                if (fps < threshold) {
+                    console.log(`🦋 Butterfly: FPS too low (${Math.round(fps)} < ${threshold}). Disabling animation.`);
                     setIsLowPerf(true);
+                    cancelAnimationFrame(rafId);
                     return;
                 }
 
-                // 2. RUNTIME FPS CHECK
-                // Monitor performance for the first 2 seconds
-                let frameCount = 0;
-                let startTime = performance.now();
-                let rafId;
-
-                const checkFPS = () => {
-                    frameCount++;
-                    const currentTime = performance.now();
-                    const elapsed = currentTime - startTime;
-
-                    if (elapsed >= 1000) { // Every second
-                        const fps = (frameCount / elapsed) * 1000;
-                        console.log(`🦋 Butterfly: Mobile FPS Check: ${Math.round(fps)}`);
-
-                        if (fps < 30) { // Threshold: Below 30fps is "laggy"
-                            console.log("🦋 Butterfly: FPS too low. Disabling animation.");
-                            setIsLowPerf(true);
-                            cancelAnimationFrame(rafId);
-                            return;
-                        }
-
-                        // Reset window
-                        frameCount = 0;
-                        startTime = currentTime;
-                    }
-
-                    // Stop checking after 3 seconds (if it's stable by then, keep it)
-                    if (performance.now() > 5000) {
-                        return;
-                    }
-
-                    rafId = requestAnimationFrame(checkFPS);
-                };
-
-                rafId = requestAnimationFrame(checkFPS);
-
-                return () => cancelAnimationFrame(rafId);
+                // Reset window
+                frameCount = 0;
+                startTime = currentTime;
             }
+
+            // Stop checking after 4 seconds to save resources
+            if (performance.now() > 4000) {
+                return;
+            }
+
+            rafId = requestAnimationFrame(checkFPS);
         };
 
-        checkMobile();
+        // Delay start slightly to avoid initial load stutter affecting the check
+        const timer = setTimeout(() => {
+            // CRITICAL FIX: Reset start time here, otherwise elapsed includes the 1s delay
+            // resulting in ~1 FPS (1 frame / 1000ms) logic error.
+            startTime = performance.now();
+            frameCount = 0;
+            rafId = requestAnimationFrame(checkFPS);
+        }, 1000);
+
         window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            cancelAnimationFrame(rafId);
+            clearTimeout(timer);
+        };
     }, []);
 
     // Performance Optimization: Don't render anything if device is struggling
