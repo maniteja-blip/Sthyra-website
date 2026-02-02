@@ -54,8 +54,8 @@ const Preloader = ({ onComplete }) => {
 
             {/* Top Shutter */}
             <motion.div
-                initial={{ height: "50vh" }}
-                animate={{ height: step === 4 ? 0 : "50vh" }}
+                initial={{ height: "50%" }}
+                animate={{ height: step === 4 ? 0 : "50%" }}
                 transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }} // Slightly faster exit (1.0s vs 1.2s)
                 className="absolute top-0 left-0 right-0 bg-[#0a0a0a] border-b border-[#d4af37]/20 z-20 overflow-hidden"
             >
@@ -78,8 +78,8 @@ const Preloader = ({ onComplete }) => {
 
             {/* Bottom Shutter */}
             <motion.div
-                initial={{ height: "50vh" }}
-                animate={{ height: step === 4 ? 0 : "50vh" }}
+                initial={{ height: "50%" }}
+                animate={{ height: step === 4 ? 0 : "50%" }}
                 transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }} // Slightly faster exit
                 className="absolute bottom-0 left-0 right-0 bg-[#0a0a0a] border-t border-[#d4af37]/20 z-20 overflow-hidden"
             >

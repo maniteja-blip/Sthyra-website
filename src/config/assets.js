@@ -13,13 +13,15 @@ const getAssetUrl = (path) => {
 export const ASSETS = {
     // HERO SECTION
     HERO: {
-        VIDEO: getAssetUrl("hero_interior.mp4"),
+        VIDEO: getAssetUrl("hero_interior.mp4"), // Standard/Optimized
+        VIDEO_HQ: getAssetUrl("hero_interior.mp4"), // Place High Quality 4K version here
         POSTER: getAssetUrl("hero_interior.png"),
     },
 
     // BELIEF SECTION
     BELIEF: {
         VIDEO_DESKTOP: getAssetUrl("belief_vid.mp4"),
+        VIDEO_DESKTOP_HQ: getAssetUrl("belief_vid.mp4"), // Place High Quality version here
         VIDEO_MOBILE: getAssetUrl("belief_vid_2.mp4"),
         BG_GRADIENT: getAssetUrl("belief_bg.webp"),
     },

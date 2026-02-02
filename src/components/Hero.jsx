@@ -2,12 +2,19 @@ import React, { useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ASSETS } from '../config/assets';
+import usePerformance from '../hooks/usePerformance';
 
 const Hero = () => {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
   const isInView = useInView(containerRef);
   const navigate = useNavigate();
+  const { isHighPerformance } = usePerformance();
+
+  // Adaptive Video Source: Use HQ if system is capable, otherwise standard
+  const videoSrc = isHighPerformance && ASSETS.HERO.VIDEO_HQ
+    ? ASSETS.HERO.VIDEO_HQ
+    : ASSETS.HERO.VIDEO;
 
   useEffect(() => {
     if (videoRef.current) {
@@ -43,7 +50,7 @@ const Hero = () => {
           playsInline
           poster={ASSETS.HERO.POSTER}
         >
-          <source src={ASSETS.HERO.VIDEO} type="video/mp4" />
+          <source src={videoSrc} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <div className="absolute inset-0 bg-black/30" /> {/* Dim overlay */}

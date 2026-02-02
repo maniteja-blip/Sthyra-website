@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ASSETS } from '../../config/assets';
+import usePerformance from '../../hooks/usePerformance';
 
 const MobileHero = () => {
     const [showText, setShowText] = useState(false);
+    const { isHighPerformance } = usePerformance();
+
+    // Adaptive Video Source: high-end phones get HQ, others get standard
+    const videoSrc = isHighPerformance && ASSETS.HERO.VIDEO_HQ
+        ? ASSETS.HERO.VIDEO_HQ
+        : ASSETS.HERO.VIDEO;
 
     useEffect(() => {
         // Delay text appearance to let background settle
@@ -17,7 +24,7 @@ const MobileHero = () => {
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-black/40 z-10" /> {/* Dimming Overlay */}
                 <video
-                    src={ASSETS.HERO.VIDEO}
+                    src={videoSrc}
                     poster={ASSETS.HERO.POSTER}
                     autoPlay
                     loop
