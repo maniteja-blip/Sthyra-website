@@ -23,16 +23,23 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        if (location.state && location.state.scrollTo) {
-            const element = document.getElementById(location.state.scrollTo);
-            if (element) {
-                // Small timeout to allow DOM to be ready and Lenis to initialize
+        if (location.state) {
+            if (location.state.scrollToMobile && isMobile) {
+                // Dispatch event after a brief delay to ensure MobileView is mounted and ready listening
                 setTimeout(() => {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
+                    const event = new CustomEvent('navigateToMobileSection', { detail: { targetId: location.state.scrollToMobile } });
+                    window.dispatchEvent(event);
+                }, 300);
+            } else if (location.state.scrollTo && !isMobile) {
+                const element = document.getElementById(location.state.scrollTo);
+                if (element) {
+                    setTimeout(() => {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                }
             }
         }
-    }, [location]);
+    }, [location, isMobile]);
 
     if (isMobile) {
         return <MobileView />;

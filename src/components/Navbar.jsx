@@ -40,6 +40,20 @@ const Navbar = () => {
 
     const scrollToSection = (id) => {
         setIsMobileMenuOpen(false);
+
+        // Mobile Navigation Handling
+        if (window.innerWidth < 768) { // Explicit mobile check matching Home.jsx
+            const targetId = id === 'case-study' ? 'projects' : id;
+            const event = new CustomEvent('navigateToMobileSection', { detail: { targetId } });
+            window.dispatchEvent(event);
+            // If on homepage, MobileView picks this up.
+            // If NOT on homepage, we navigate home first
+            if (location.pathname !== '/') {
+                navigate('/', { state: { scrollToMobile: targetId } });
+            }
+            return;
+        }
+
         if (location.pathname !== '/') {
             navigate('/', { state: { scrollTo: id } });
         } else {
@@ -61,13 +75,21 @@ const Navbar = () => {
 
     const navigateToContact = () => {
         setIsMobileMenuOpen(false);
-        navigate('/contact');
+        if (window.innerWidth < 768) {
+            const event = new CustomEvent('navigateToMobileSection', { detail: { targetId: 'contact' } });
+            window.dispatchEvent(event);
+            if (location.pathname !== '/') {
+                navigate('/', { state: { scrollToMobile: 'contact' } });
+            }
+        } else {
+            navigate('/contact');
+        }
     }
 
     return (
         <>
             <motion.nav
-                className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-12 py-6 transition-all duration-500 pointer-events-none ${isScrolled ? 'bg-transparent md:bg-[#0a0a0a]/90 md:backdrop-blur-md py-4' : 'bg-transparent'}`}
+                className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-12 py-6 transition-colors duration-500 pointer-events-none ${isScrolled ? 'bg-transparent md:bg-[#0a0a0a]/90 md:backdrop-blur-md py-4' : 'bg-transparent'}`}
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1, delay: 1 }}
@@ -101,15 +123,15 @@ const Navbar = () => {
                 >
                     <motion.div
                         animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                        className="w-full h-[1px] bg-white origin-center transition-all"
+                        className="w-full h-[1px] bg-white origin-center"
                     ></motion.div>
                     <motion.div
                         animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                        className="w-2/3 h-[1px] bg-white transition-all"
+                        className="w-2/3 h-[1px] bg-white"
                     ></motion.div>
                     <motion.div
                         animate={isMobileMenuOpen ? { rotate: -45, y: -6, width: "100%" } : { rotate: 0, y: 0, width: "100%" }} // Adjusted width logic for symmetry 
-                        className="w-full h-[1px] bg-white origin-center transition-all"
+                        className="w-full h-[1px] bg-white origin-center"
                     ></motion.div>
                 </div>
             </motion.nav>
@@ -118,10 +140,10 @@ const Navbar = () => {
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: "-100%" }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: "-100%" }}
-                        transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+                        initial={{ opacity: 0 }} /* Simplified initial state */
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }} /* Simplified exit for performance */
+                        transition={{ duration: 0.2 }} /* Even faster duration */
                         className="fixed inset-0 z-40 bg-[#0a0a0a] flex flex-col items-center justify-center gap-8 text-2xl font-light uppercase tracking-widest"
                     >
                         <button onClick={() => scrollToSection('case-study')} className="hover:text-[#d4af37] transition-colors">Projects</button>

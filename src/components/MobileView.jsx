@@ -40,6 +40,22 @@ const MobileView = () => {
         }
     };
 
+    // Listen for Navbar navigation events
+    React.useEffect(() => {
+        const handleNavigation = (e) => {
+            const targetId = e.detail?.targetId;
+            const index = sections.findIndex(s => s.id === targetId);
+            if (index !== -1) {
+                setDirection(index > currentIndex ? 1 : -1);
+                setCurrentIndex(index);
+            }
+        };
+
+        window.addEventListener('navigateToMobileSection', handleNavigation);
+        return () => window.removeEventListener('navigateToMobileSection', handleNavigation);
+    }, [currentIndex]); // Depend on currentIndex for direction calculation logic if needed, though mostly okay without it
+
+
     const variants = {
         enter: (direction) => ({
             y: direction > 0 ? '100%' : '-100%',
