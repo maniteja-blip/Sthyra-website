@@ -70,7 +70,7 @@ const MobileComparison = () => {
                     {/* Label for Right Side */}
                     <div className="absolute bottom-32 right-6 text-right pointer-events-none">
                         <span className="bg-black/50 backdrop-blur-md px-3 py-1 text-[10px] text-[#d4af37] border border-[#d4af37]/30 rounded-full font-bold uppercase tracking-widest">
-                            Sthyra Way
+                            <span className="font-serif">Sthyra</span> Way
                         </span>
                     </div>
                 </div>

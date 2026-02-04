@@ -44,7 +44,7 @@ const MobileHero = () => {
                     <p className="text-[10px] uppercase tracking-[0.4em] text-gray-300 mb-4 font-light">
                         Architectural Visualization
                     </p>
-                    <h1 className="text-5xl font-serif text-white leading-tight mb-2">
+                    <h1 className="text-5xl font-conneqt text-white leading-tight mb-2">
                         STHYRA
                     </h1>
                     <div className="w-12 h-[1px] bg-[#d4af37] mx-auto mt-6 opacity-80" />

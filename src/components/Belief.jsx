@@ -58,6 +58,7 @@ const Belief = () => {
                         <source src={ASSETS.BELIEF.VIDEO_MOBILE} media="(max-width: 767px)" />
                         <source src={ASSETS.BELIEF.VIDEO_DESKTOP} type="video/mp4" />
                     </motion.video>
+
                     {/* Simple Dark Overlay like Hero Section */}
                     <div className="absolute inset-0 bg-black/40" />
 

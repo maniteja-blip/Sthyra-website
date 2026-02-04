@@ -46,7 +46,7 @@ const Footer = () => {
             {/* MASSIVE FOOTER LOGO */}
             <div className="border-t border-white/10 pt-4 relative">
                 <div className="flex justify-between items-end text-[10px] md:text-xs uppercase tracking-widest text-gray-600 mb-2">
-                    <span>© 2026 Sthyra Inc.</span>
+                    <span>© 2026 <span className="font-serif">Sthyra</span> Inc.</span>
                     <span>Bangalore, India</span>
                 </div>
 

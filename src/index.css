@@ -4,10 +4,21 @@
   --font-serif: "Playfair Display", serif;
   --font-sans: "Manrope", sans-serif;
   --font-script: "Pinyon Script", cursive;
+  --font-conneqt: "Conneqt", sans-serif;
 
   --color-bg: #0a0a0a;
   --color-text: #f0f0f0;
   --color-accent: #d4af37;
+}
+
+
+
+@font-face {
+  font-family: 'Conneqt';
+  src: url('/assets/ConneqtRegular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @layer base {

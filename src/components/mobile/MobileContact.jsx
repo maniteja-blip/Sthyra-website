@@ -117,7 +117,7 @@ const MobileContact = () => {
 
             {/* Footer Minimal */}
             <div className="absolute bottom-6 left-0 right-0 text-center">
-                <p className="text-[10px] text-gray-700 uppercase tracking-widest">© Sthyra 2025</p>
+                <p className="text-[10px] text-gray-700 uppercase tracking-widest">© <span className="font-serif">Sthyra</span> 2025</p>
             </div>
         </div>
     );

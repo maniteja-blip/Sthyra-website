@@ -67,9 +67,9 @@ const Preloader = ({ onComplete }) => {
                             y: step >= 1 ? 0 : 30
                         }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="overflow-hidden"
+                        className="overflow-visible pb-4 pt-2"
                     >
-                        <h1 className="text-6xl md:text-8xl font-serif text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500">
+                        <h1 className="text-6xl md:text-8xl font-conneqt text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 leading-none pb-2">
                             STHYRA
                         </h1>
                     </motion.div>
