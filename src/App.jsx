@@ -10,6 +10,9 @@ import NoiseOverlay from './components/NoiseOverlay';
 import SmoothScroll from './components/SmoothScroll';
 import Home from './components/Home';
 import Contact from './components/Contact';
+import About from './components/About';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import Terms from './components/Terms';
 import Preloader from './components/Preloader';
 
 function App() {
@@ -54,6 +57,9 @@ function App() {
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<Terms />} />
         </Routes>
 
 

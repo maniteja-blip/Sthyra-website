@@ -32,14 +32,34 @@ const Footer = () => {
                 </div>
 
                 {/* LINKS & SOCIALS */}
-                <div className="flex gap-20 mt-16 md:mt-0 text-sm uppercase tracking-widest text-gray-400">
+                <div className="flex gap-16 md:gap-20 mt-16 md:mt-0 text-xs md:text-sm uppercase tracking-widest text-gray-400">
                     <div className="flex flex-col gap-4">
-                        <span className="text-white opacity-50 mb-2">Socials</span>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Linkedin</a>
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Twitter/X</a>
+                        <span className="text-white opacity-40 mb-2">Company</span>
+                        <button onClick={() => navigate('/about')} className="text-left hover:text-white transition-colors">About</button>
+                        <button onClick={() => navigate('/contact')} className="text-left hover:text-white transition-colors">Contact</button>
+                        <button onClick={() => navigate('/privacy-policy')} className="text-left hover:text-white transition-colors">Privacy</button>
+                        <button onClick={() => navigate('/terms')} className="text-left hover:text-white transition-colors">Terms</button>
                     </div>
 
+                    <div className="flex flex-col gap-4">
+                        <span className="text-white opacity-40 mb-2">Socials</span>
+                        <a
+                            href="https://www.instagram.com/sthyra.studios?igsh=ZWwxeWdmODhpa2Zn"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-white transition-colors"
+                        >
+                            Instagram
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/company/sthyra/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-white transition-colors"
+                        >
+                            LinkedIn
+                        </a>
+                    </div>
                 </div>
             </div>
 
