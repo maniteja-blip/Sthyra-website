@@ -59,8 +59,8 @@ export const ASSETS = {
 
     // GLOBAL
     GLOBAL: {
-        LOGO: getAssetUrl("logo.webp"),
-        FOOTER_LOGO: getAssetUrl("Sthyra_Lg_gold.webp"),
+        LOGO: getAssetUrl("sthyra_logo_new.png"),
+        FOOTER_LOGO: getAssetUrl("sthyra_logo_new.png"),
         BUTTERFLY_GLB: getAssetUrl("butterfly.gltf"), // Or .glb depending on what's used
     }
 };

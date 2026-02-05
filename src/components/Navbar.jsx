@@ -99,7 +99,7 @@ const Navbar = () => {
                     <img
                         src={ASSETS.GLOBAL.LOGO}
                         alt="Sthyra Real Estate Visualization Logo"
-                        className="w-full h-auto object-contain filter invert brightness-0"
+                        className="w-full h-auto object-contain"
                     />
                 </div>
 
@@ -134,10 +134,10 @@ const Navbar = () => {
                         className="w-full h-[1px] bg-white origin-center"
                     ></motion.div>
                 </div>
-            </motion.nav>
+            </motion.nav >
 
             {/* Mobile Menu Overlay */}
-            <AnimatePresence>
+            < AnimatePresence >
                 {isMobileMenuOpen && (
                     <motion.div
                         initial={{ opacity: 0 }} /* Simplified initial state */
@@ -151,8 +151,9 @@ const Navbar = () => {
                         <button onClick={() => scrollToSection('belief')} className="hover:text-[#d4af37] transition-colors">Beliefs</button>
                         <button onClick={navigateToContact} className="hover:text-[#d4af37] transition-colors">Contact</button>
                     </motion.div>
-                )}
-            </AnimatePresence>
+                )
+                }
+            </AnimatePresence >
         </>
     );
 };

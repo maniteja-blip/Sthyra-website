@@ -6,7 +6,7 @@ const Footer = () => {
     const navigate = useNavigate();
 
     return (
-        <footer id="footer" className="bg-[#050505] text-[#f0f0f0] pt-32 pb-[2px] md:pb-[2px] px-6 md:px-12 border-t border-white/5 overflow-hidden">
+        <footer id="footer" className="bg-[#050505] text-[#f0f0f0] py-16 px-6 md:px-12 border-t border-white/5 overflow-hidden">
             <div className="flex flex-col md:flex-row justify-between items-start mb-24 md:mb-32">
 
                 {/* HEADLINE */}
@@ -47,7 +47,11 @@ const Footer = () => {
             <div className="border-t border-white/10 pt-4 relative">
                 <div className="flex justify-between items-end text-[10px] md:text-xs uppercase tracking-widest text-gray-600 mb-2">
                     <span>© 2026 <span className="font-serif">Sthyra</span> Inc.</span>
-                    <span>Bangalore, India</span>
+                    <div className="flex flex-col items-end gap-2">
+                        <span>Bangalore, India</span>
+                        {/* Right Side Corner Logo as requested */}
+                        <img src={ASSETS.GLOBAL.LOGO} alt="Sthyra Small Logo" className="w-16 h-auto opacity-80" />
+                    </div>
                 </div>
 
                 <div className="flex justify-center items-center -mb-4 md:-mb-6 pointer-events-none select-none">
@@ -57,7 +61,7 @@ const Footer = () => {
                     <img
                         src={ASSETS.GLOBAL.FOOTER_LOGO}
                         alt="Sthyra Logo"
-                        className="w-[50vw] md:w-[35vw] object-contain opacity-90"
+                        className="w-[30vw] md:w-[20vw] object-contain opacity-90"
                     />
                 </div>
             </div>
