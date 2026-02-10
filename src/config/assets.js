@@ -15,6 +15,7 @@ export const ASSETS = {
     HERO: {
         VIDEO: getAssetUrl("hero_interior.mp4"), // Standard/Optimized
         VIDEO_HQ: getAssetUrl("hero_interior.mp4"), // Place High Quality 4K version here
+        VIDEO_WEBM: getAssetUrl("hero_interior.webm"), // WebM for low bandwidth
         POSTER: getAssetUrl("hero_interior.png"),
     },
 
@@ -22,7 +23,8 @@ export const ASSETS = {
     BELIEF: {
         VIDEO_DESKTOP: getAssetUrl("belief_vid.mp4"),
         VIDEO_DESKTOP_HQ: getAssetUrl("belief_vid.mp4"), // Place High Quality version here
-        VIDEO_MOBILE: getAssetUrl("belief_vid_2.mp4"),
+        VIDEO_MOBILE: getAssetUrl("belief_vid.mp4"),
+        VIDEO_WEBM: getAssetUrl("belief_vid.webm"), // WebM for low bandwidth
         BG_GRADIENT: getAssetUrl("belief_bg.webp"),
     },
 

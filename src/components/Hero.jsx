@@ -9,7 +9,9 @@ const Hero = () => {
   const videoRef = useRef(null);
   const isInView = useInView(containerRef);
   const navigate = useNavigate();
-  const { isHighPerformance } = usePerformance();
+  const { tier } = usePerformance();
+  const isHighPerformance = tier === 'high';
+  const isLowPerformance = tier === 'low';
 
   // Adaptive Video Source: Use HQ if system is capable, otherwise standard
   const videoSrc = isHighPerformance && ASSETS.HERO.VIDEO_HQ
@@ -34,25 +36,37 @@ const Hero = () => {
 
   return (
     <section id="hero" ref={containerRef} className="relative w-full h-screen overflow-hidden">
-      {/* Background Video with Slow Scale */}
+      {/* Background Video with Slow Scale or Fallback Image */}
       <motion.div
         className="absolute inset-0 w-full h-full will-change-transform"
         initial={{ scale: 1.1 }}
         animate={{ scale: 1 }}
         transition={{ duration: 10, ease: "easeOut" }}
       >
-        <video
-          ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster={ASSETS.HERO.POSTER}
-        >
-          <source src={videoSrc} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        {isLowPerformance ? (
+          <video
+            className="absolute inset-0 w-full h-full object-cover opacity-80"
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source src={ASSETS.HERO.VIDEO_WEBM} type="video/webm" />
+          </video>
+        ) : (
+          <video
+            ref={videoRef}
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={ASSETS.HERO.POSTER}
+          >
+            <source src={videoSrc} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
         <div className="absolute inset-0 bg-black/30" /> {/* Dim overlay */}
       </motion.div>
 

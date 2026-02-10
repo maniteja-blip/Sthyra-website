@@ -1,41 +1,40 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { ASSETS } from '../../config/assets';
+import usePerformance from '../../hooks/usePerformance';
 
 const MobileBelief = () => {
     const videoRef = useRef(null);
     const containerRef = useRef(null);
     const isInView = useInView(containerRef, { margin: "0px 0px -20% 0px" });
     const [videoLoaded, setVideoLoaded] = useState(false);
+    const { tier } = usePerformance();
+    const isLowPerformance = tier === 'low';
 
     useEffect(() => {
-        if (videoRef.current && videoLoaded) {
+        if (!isLowPerformance && videoRef.current && videoLoaded) {
             if (isInView) {
                 videoRef.current.play().catch(() => { });
             } else {
                 videoRef.current.pause();
             }
         }
-    }, [isInView, videoLoaded]);
+    }, [isInView, videoLoaded, isLowPerformance]);
 
     return (
         <div ref={containerRef} className="relative w-full h-full flex items-center justify-center overflow-hidden bg-[#050505]">
 
-            {/* Background Video */}
+            {/* Background Video or Fallback Image */}
             <div className="absolute inset-0 z-0">
+                {/* Always use WebM for Mobile */}
                 <video
-                    ref={videoRef}
-                    className={`w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                    className="w-full h-full object-cover opacity-80"
                     autoPlay
                     muted
                     loop
                     playsInline
-                    preload="auto"
-                    onLoadedData={() => setVideoLoaded(true)}
-                    onError={(e) => console.error("Video Error:", e)}
                 >
-                    <source src={ASSETS.BELIEF.VIDEO_MOBILE} media="(max-width: 767px)" />
-                    <source src={ASSETS.BELIEF.VIDEO_DESKTOP} type="video/mp4" />
+                    <source src={ASSETS.BELIEF.VIDEO_WEBM} type="video/webm" />
                 </video>
                 <div className="absolute inset-0 bg-black/40" />
             </div>

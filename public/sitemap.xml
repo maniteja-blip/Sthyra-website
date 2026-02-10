@@ -9,4 +9,40 @@
     <loc>https://sthyra.com/contact</loc>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://sthyra.com/services/architectural-visualization</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sthyra.com/services/3d-rendering-services</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sthyra.com/services/vr-real-estate</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sthyra.com/services/real-estate-marketing</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sthyra.com/services/interactive-3d-walkthrough</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sthyra.com/services/property-digital-twin</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sthyra.com/services/3d-visualization-studio-india</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sthyra.com/services/pixel-streaming-real-estate</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sthyra.com/services/luxury-property-marketing</loc>
+    <priority>0.7</priority>
+  </url>
 </urlset>

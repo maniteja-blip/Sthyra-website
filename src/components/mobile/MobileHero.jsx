@@ -8,9 +8,8 @@ const MobileHero = () => {
     const { isHighPerformance } = usePerformance();
 
     // Adaptive Video Source: high-end phones get HQ, others get standard
-    const videoSrc = isHighPerformance && ASSETS.HERO.VIDEO_HQ
-        ? ASSETS.HERO.VIDEO_HQ
-        : ASSETS.HERO.VIDEO;
+    // Enforce WebM for Mobile (Lower bandwidth/size)
+    const videoSrc = ASSETS.HERO.VIDEO_WEBM;
 
     useEffect(() => {
         // Delay text appearance to let background settle

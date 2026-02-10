@@ -2,11 +2,15 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { ASSETS } from '../config/assets';
 
+import usePerformance from '../hooks/usePerformance';
+
 const Belief = () => {
     const containerRef = useRef(null);
     const videoRef = useRef(null);
     const [videoLoaded, setVideoLoaded] = useState(false);
     const isInView = useInView(containerRef, { margin: "0px 0px -20% 0px" }); // Trigger a bit earlier/later
+    const { tier } = usePerformance();
+    const isLowPerformance = tier === 'low';
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -15,14 +19,14 @@ const Belief = () => {
 
     // Optimize play/pause based on visibility
     useEffect(() => {
-        if (videoRef.current && videoLoaded) {
+        if (!isLowPerformance && videoRef.current && videoLoaded) {
             if (isInView) {
                 videoRef.current.play().catch(e => { });
             } else {
                 videoRef.current.pause();
             }
         }
-    }, [isInView, videoLoaded]);
+    }, [isInView, videoLoaded, isLowPerformance]);
 
     // Parallax Effect for Background - REMOVED per user request to fix overlapping issue
     // const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
@@ -44,20 +48,32 @@ const Belief = () => {
                     className="absolute inset-0 w-full h-full will-change-transform"
                     style={{ opacity }}
                 >
-                    <motion.video
-                        ref={videoRef}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="auto"
-                        onLoadedData={() => setVideoLoaded(true)}
-                    // Removed style={{ y, scale }}
-                    >
-                        <source src={ASSETS.BELIEF.VIDEO_MOBILE} media="(max-width: 767px)" />
-                        <source src={ASSETS.BELIEF.VIDEO_DESKTOP} type="video/mp4" />
-                    </motion.video>
+                    {isLowPerformance ? (
+                        <video
+                            className="absolute inset-0 w-full h-full object-cover opacity-80"
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                        >
+                            <source src={ASSETS.BELIEF.VIDEO_WEBM} type="video/webm" />
+                        </video>
+                    ) : (
+                        <motion.video
+                            ref={videoRef}
+                            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            preload="auto"
+                            onLoadedData={() => setVideoLoaded(true)}
+                        // Removed style={{ y, scale }}
+                        >
+                            <source src={ASSETS.BELIEF.VIDEO_MOBILE} media="(max-width: 767px)" />
+                            <source src={ASSETS.BELIEF.VIDEO_DESKTOP} type="video/mp4" />
+                        </motion.video>
+                    )}
 
                     {/* Simple Dark Overlay like Hero Section */}
                     <div className="absolute inset-0 bg-black/40" />

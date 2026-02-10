@@ -14,6 +14,8 @@ import About from './components/About';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Terms from './components/Terms';
 import Preloader from './components/Preloader';
+import LandingPage from './components/LandingPage';
+import { seoContent } from './data/seoContent';
 
 function App() {
   const location = useLocation();
@@ -60,6 +62,17 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
+
+          {/* SEO Landing Pages (Invisible Routes) */}
+          <Route path="/services/architectural-visualization" element={<LandingPage {...seoContent['architectural-visualization']} />} />
+          <Route path="/services/3d-rendering-services" element={<LandingPage {...seoContent['3d-rendering-services']} />} />
+          <Route path="/services/vr-real-estate" element={<LandingPage {...seoContent['vr-real-estate']} />} />
+          <Route path="/services/real-estate-marketing" element={<LandingPage {...seoContent['real-estate-marketing']} />} />
+          <Route path="/services/interactive-3d-walkthrough" element={<LandingPage {...seoContent['interactive-3d-walkthrough']} />} />
+          <Route path="/services/property-digital-twin" element={<LandingPage {...seoContent['property-digital-twin']} />} />
+          <Route path="/services/3d-visualization-studio-india" element={<LandingPage {...seoContent['3d-visualization-studio-india']} />} />
+          <Route path="/services/pixel-streaming-real-estate" element={<LandingPage {...seoContent['pixel-streaming-real-estate']} />} />
+          <Route path="/services/luxury-property-marketing" element={<LandingPage {...seoContent['luxury-property-marketing']} />} />
         </Routes>
 
 
