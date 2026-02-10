@@ -129,9 +129,6 @@ Sthyra creates ultra-high-fidelity twins that serve as the foundation for your e
 
 As a leading **3D Visualization Studio in Bangalore**, Sthyra bridges the gap between cost-efficiency and premium quality. India is a hub for technological innovation, and our studio leverages the best talent in 3D artistry and game development.
 
-### Our Global Reach
-
-While based in Bangalore, we work with architects and developers in Dubai, London, New York, and Sydney. Our workflow is optimized for remote collaboration, ensuring seamless communication and timely delivery.
 
 Partner with Sthyra for reliability, artistic excellence, and cutting-edge technology.
         `
