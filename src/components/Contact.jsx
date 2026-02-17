@@ -149,7 +149,7 @@ const Contact = () => {
                                         value={formData.name}
                                         onChange={handleChange}
                                         className={`w-full bg-transparent border-b ${errors.name ? 'border-red-500' : 'border-white/20'} py-2 text-white focus:outline-none focus:border-[#d4af37] transition-colors`}
-                                        placeholder="John Doe"
+                                        placeholder="Maniteja"
                                     />
                                     {errors.name && <span className="text-red-500 text-xs mt-1">{errors.name}</span>}
                                 </div>
@@ -175,7 +175,7 @@ const Contact = () => {
                                         value={formData.email}
                                         onChange={handleChange}
                                         className={`w-full bg-transparent border-b ${errors.email ? 'border-red-500' : 'border-white/20'} py-2 text-white focus:outline-none focus:border-[#d4af37] transition-colors`}
-                                        placeholder="john@example.com"
+                                        placeholder="maniteja@example.com"
                                     />
                                     {errors.email && <span className="text-red-500 text-xs mt-1">{errors.email}</span>}
                                 </div>
